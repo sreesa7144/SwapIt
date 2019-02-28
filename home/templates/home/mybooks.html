@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+{% extends 'home/Base.html' %}
+{% block title %} User Books {% endblock %}
+
+<head>{% block head %}
+
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" type='text/css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+  @import url(https://fonts.googleapis.com/css?family=Arvo:700);
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+    {% endblock %}
+</head>
+<body>
+
+{% block body %}
+
+{% if error_message %}<p><strong> {{ error_message }} </strong></p>{% endif %}
+{{ message }}
+
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Books of {{ user.username }}</h1>
+
+    <p> </p>
+  </div>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+  <div class="row">
+      {% for userbooks in user.userbooks_set.all %}
+      {% if forloop.counter|divisibleby:4 %}
+  </div> <div class="row">
+          {% endif %}
+    <div class="col-sm-3">
+         <a href="/home/{{ userbooks.id }}"> <img src="{{ userbooks.book_url }}" class="img-thumbnail" style="width:30%" alt="{{ userbooks.name }}" height="42" width="42"></a><br><br>
+    </div>
+      {% endfor %}
+</div>
+
+
+<footer class="container-fluid text-center">
+
+
+    <p align="right">{{ div|safe }}
+            {{ script|safe }} </p>
+
+
+</footer>
+
+</body>
+
+
+{% endblock %}

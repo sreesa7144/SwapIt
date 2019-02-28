@@ -1,0 +1,11 @@
+{% extends 'home/Base.html' %}
+{% block title %}Add Books{% endblock %}
+
+{% block body %}
+
+<form class="site-form" action="{% url 'home:addBooks' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+
+{% endblock %}
