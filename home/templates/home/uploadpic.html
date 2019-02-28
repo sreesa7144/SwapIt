@@ -1,0 +1,8 @@
+{% extends 'home/Base.html' %}
+{% block body %}
+
+<form class="site-form" action="{% url 'home:uploadPic' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+{% endblock %}

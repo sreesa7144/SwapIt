@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+{% extends 'home/Base.html' %}
+{% block title %} Wish List {% endblock %}
+<head>{% block head %}
+
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" type='text/css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+  @import url(https://fonts.googleapis.com/css?family=Arvo:700);
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+    {% endblock %}
+</head>
+{% block body %}
+
+
+<h1>
+    Liked Books Of {{ user.username }}
+</h1>
+{% if error_message %}<p><strong> {{ error_message }} </strong></p>{% endif %}
+
+    {% for userbooks in user.favbooks_set.all %}
+    <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+
+             <a href="/home/{{ userbooks.book_id.id }}"> <img src="{{ userbooks.book_id.book_url }}" class="img-thumbnail" style="width:10%" alt="{{ userbooks.book_id.book_name }}" height="42" width="42"></a><br>
+                </div>
+            </div>
+         <div class="col-sm-5">
+          <div class="well">
+                <p>BOOK NAME :{{ userbooks.book_id.book_name }}</p>
+              <p>BOOK AUTHOR :{{ userbooks.book_id.book_author }}</p>
+          </div>
+        </div>
+           </div>
+    {% endfor %}
+
+{% endblock %}
