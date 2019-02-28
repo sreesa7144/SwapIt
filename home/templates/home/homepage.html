@@ -1,0 +1,117 @@
+{% extends 'home/Base.html' %}
+
+
+<head>{% block head %}
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+
+  <style>
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+  </style>
+{% endblock %}</head>
+
+<body>{% block body %}
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-3 well">
+      <div class="well">
+        <p><a href="#">{{ request.user.username }}</a></p>
+        {% if flag %}
+        <img src="{{ obj.image.url }}" class="img-circle" height="65" width="65" alt="Avatar">
+        {% else %}
+        <a href="{% url 'home:uploadPic' %}"> UPLOAD PROFILE PICTURE</a>
+        {% endif %}
+      </div>
+      <div class="well">
+        <p><a href="#">Genres</a></p>
+
+          {% for bookgenre in bookgenres %}
+        {% for key,value in bookgenre.items %}
+          <form action="" method="post">{% csrf_token %}
+        <button name="topbook" type="submit" value="{{ value }}"><span class="label label-success">{{ value }}</span></button></form>
+  {% endfor %}
+         {% endfor %}
+
+
+      </div>
+      <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <p><strong>Ey!</strong></p>
+
+      </div>
+      <p>contact details</p>
+      <p>contact details</p>
+      <p>contact details</p>
+    </div>
+    <div class="col-sm-7">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-body">
+              <p contenteditable="true">Status: Feeling Blue</p>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% for books in topbooks %}
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+          <a class="button" href="/home/{{ books.id }}"> <img src="{{ books.book_url }}" class="img-thumbnail" height="55" width="55" alt="Avatar"></a>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="well">
+          <p>{{ books.book_name }}</p>
+            <p>{{ books.book_author }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+    <div class="col-sm-2 well">
+      <div class="thumbnail">
+        <h3>Your Books Graph</h3>
+         <p>{{ div1|safe }}
+            {{ script1|safe }}</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <h3>{{ genre }} Graph</h3>
+      <p>{{ div|safe }}
+            {{ script|safe }}</p>
+       </div>
+
+
+  </div>
+
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+
+
+{% endblock %}</body>

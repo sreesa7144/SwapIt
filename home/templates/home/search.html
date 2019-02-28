@@ -1,0 +1,66 @@
+
+{% extends 'home/Base.html' %}
+{% block title %} User Books {% endblock %}
+<head>{% block head %}
+
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" type='text/css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+  @import url(https://fonts.googleapis.com/css?family=Arvo:700);
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+    {% endblock %}
+</head>
+{% block body %}
+
+<h1>
+    we have found {{ setvalues.count }} results
+</h1>
+{% if error_message %}<p><strong> {{ error_message }} </strong></p>{% endif %}
+    {% for vals in setvalues %}
+     {% if flag == 1 or flag == 3 or flag == 4 %}
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+
+
+
+           <p>{{ vals.book_name }}</p>
+           <a href="/home/{{ vals.id }}"> <img src="{{ vals.book_url }}" class="img-thumbnail" style="width:10%" alt="{{ vals.book_name }}" height="42" width="42"> </a>
+               </div>
+            </div>
+          <div class="col-sm-9">
+          <div class="well">
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+          </div>
+        </div>
+           </div>
+               {% endif %}
+
+
+
+    {% if flag == 2 %}
+    <a href="/home/{{ vals.pk }}/userbooks">{{ vals.username }}</a><br>
+    {% endif %}
+  <br><br>
+    {% endfor %}
+
+{% endblock %}
